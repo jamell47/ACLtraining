@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advenware Career Link | Candidate Readiness Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0a1f44;--red:#d62828;--white:#fff;--gray:#f4f5f7;--text:#333;--light:#666;--border:#e0e0e0;--shadow:0 4px 20px rgba(0,0,0,.08)}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;color:var(--text);background:var(--white);line-height:1.6;overflow-x:hidden}
+.hidden{display:none!important}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--white);box-shadow:0 2px 10px rgba(0,0,0,.05);height:70px}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:100%}
+.logo-area{display:flex;align-items:center;gap:12px}
+.logo-area img{height:40px;width:auto}
+.logo-text{font-weight:700;font-size:14px;color:var(--navy);letter-spacing:.5px}
+nav{display:flex;align-items:center;gap:30px}
+nav a{text-decoration:none;color:var(--text);font-weight:500;font-size:14px;transition:color .2s}
+nav a:hover{color:var(--red)}
+.btn{display:inline-block;padding:12px 28px;border-radius:8px;font-weight:600;font-size:14px;text-decoration:none;cursor:pointer;border:none;transition:all .2s;font-family:'Poppins',sans-serif}
+.btn-primary{background:var(--navy);color:var(--white);padding:14px 32px}
+.btn-primary:hover{background:#0d2a5c;transform:translateY(-1px)}
+.btn-red{background:var(--red);color:var(--white)}
+.btn-red:hover{background:#b81e1e;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--navy);border:2px solid var(--navy)}
+.btn-outline:hover{background:var(--navy);color:var(--white)}
+.mobile-menu-btn{display:none;background:none;border:none;font-size:24px;cursor:pointer;color:var(--navy)}
+.page{display:none;min-height:100vh}
+.page.active{display:block}
+.page-content{padding-top:70px}
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#0d2a5c 100%);min-height:calc(100vh - 70px);display:flex;align-items:center;position:relative;overflow:hidden}
+.hero-inner{max-width:1200px;margin:0 auto;padding:60px 20px;display:flex;align-items:center;gap:40px;width:100%}
+.hero-text{flex:1;color:var(--white);z-index:2}
+.hero-text h1{font-size:clamp(28px,5vw,52px);font-weight:700;line-height:1.15;margin-bottom:20px}
+.hero-text h1 span{color:var(--red)}
+.hero-text p{font-size:16px;color:rgba(255,255,255,.85);max-width:500px;margin-bottom:30px;line-height:1.7}
+.hero-visual{flex:1;display:flex;align-items:center;justify-content:center;position:relative}
+.hero-illustration{width:100%;max-width:500px;aspect-ratio:1;position:relative}
+.hero-illustration .circle{position:absolute;border-radius:50%}
+.hero-illustration .c1{width:300px;height:300px;background:rgba(255,255,255,.05);top:50%;left:50%;transform:translate(-50%,-50%)}
+.hero-illustration .c2{width:220px;height:220px;background:rgba(214,40,40,.15);top:50%;left:50%;transform:translate(-50%,-50%)}
+.hero-illustration .c3{width:160px;height:160px;background:rgba(255,255,255,.08);top:50%;left:50%;transform:translate(-50%,-50%)}
+.hero-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:80px;color:rgba(255,255,255,.2)}
+.info-section{max-width:1200px;margin:-60px auto 0;padding:0 20px;position:relative;z-index:10}
+.info-cards{background:var(--white);border-radius:16px;box-shadow:var(--shadow);padding:40px;display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.info-card{text-align:center;padding:20px 10px;border-right:1px solid var(--gray)}
+.info-card:last-child{border-right:none}
+.info-card .icon{width:48px;height:48px;background:rgba(10,31,68,.08);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:20px;color:var(--navy)}
+.info-card h4{font-size:13px;color:var(--light);font-weight:500;margin-bottom:8px}
+.info-card p{font-size:15px;font-weight:700;color:var(--navy)}
+.about-section{max-width:1200px;margin:80px auto;padding:0 20px}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.section-title{font-size:28px;font-weight:700;color:var(--navy);margin-bottom:20px;position:relative;display:inline-block}
+.section-title::after{content:'';position:absolute;bottom:-8px;left:0;width:60px;height:4px;background:var(--red);border-radius:2px}
+.about-text p{color:var(--light);line-height:1.8;margin-bottom:16px}
+.about-card{background:var(--white);border-radius:16px;padding:40px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.about-card h3{font-size:20px;font-weight:700;color:var(--navy);margin-bottom:24px}
+.about-card ul{list-style:none}
+.about-card li{padding:10px 0;display:flex;align-items:center;gap:12px;color:var(--text);font-size:15px}
+.about-card li::before{content:'✓';color:var(--red);font-weight:700;font-size:18px}
+.modules-section{max-width:1200px;margin:80px auto;padding:0 20px}
+.modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.module-card{background:var(--white);border-radius:16px;padding:30px;box-shadow:var(--shadow);border:1px solid var(--border);transition:transform .2s,box-shadow .2s}
+.module-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.module-card .mod-num{display:inline-block;background:var(--navy);color:var(--white);font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;margin-bottom:16px}
+.module-card h3{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:12px}
+.module-card p{font-size:14px;color:var(--light);line-height:1.7}
+.faq-section{max-width:1200px;margin:80px auto;padding:0 20px}
+.faq-item{background:var(--white);border-radius:12px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid var(--border);overflow:hidden}
+.faq-question{padding:20px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:var(--navy);font-size:15px;background:var(--white);border:none;width:100%;text-align:left;font-family:'Poppins',sans-serif}
+.faq-question::after{content:'+';font-size:20px;color:var(--red);font-weight:700}
+.faq-item.open .faq-question::after{content:'−'}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 24px}
+.faq-item.open .faq-answer{max-height:500px;padding:0 24px 20px}
+.faq-answer p{color:var(--light);font-size:14px;line-height:1.7}
+footer{background:var(--navy);color:rgba(255,255,255,.8);padding:60px 20px 30px}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-col h4{color:var(--white);font-size:16px;margin-bottom:16px;font-weight:600}
+.footer-col a{display:block;color:rgba(255,255,255,.7);text-decoration:none;font-size:14px;margin-bottom:10px}
+.footer-col a:hover{color:var(--white)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;text-align:center;font-size:13px}
+.candidate-section{max-width:700px;margin:0 auto;padding:60px 20px}
+.candidate-section .section-title{font-size:32px;margin-bottom:10px}
+.candidate-section .subtitle{color:var(--light);margin-bottom:30px}
+.form-card{background:var(--white);border-radius:16px;padding:40px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.form-group{margin-bottom:20px}
+.form-group.full{grid-column:1/-1}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.form-group input,.form-group select{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:8px;font-size:14px;font-family:'Poppins',sans-serif;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--navy)}
+.checkbox-group{display:flex;align-items:flex-start;gap:12px;margin-top:20px}
+.checkbox-group input{width:18px;height:18px;margin-top:4px;accent-color:var(--red)}
+.checkbox-group label{font-size:13px;color:var(--light);line-height:1.6}
+.error-msg{color:var(--red);font-size:12px;margin-top:6px;display:none}
+.form-actions{display:flex;gap:12px;margin-top:30px;justify-content:flex-end}
+.training-header{background:var(--navy);color:var(--white);padding:30px 20px}
+.training-header-inner{max-width:800px;margin:0 auto}
+.training-header h2{font-size:24px;font-weight:700;margin-bottom:8px}
+.training-meta{display:flex;align-items:center;gap:20px;font-size:14px;color:rgba(255,255,255,.8)}
+.progress-mini{flex:1;height:8px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden}
+.progress-mini-fill{height:100%;background:var(--red);border-radius:4px;transition:width .3s}
+.training-content{max-width:800px;margin:0 auto;padding:40px 20px;background:var(--gray);min-height:calc(100vh - 200px)}
+.module-display{background:var(--white);border-radius:16px;padding:40px;box-shadow:var(--shadow)}
+.module-display h1{font-size:24px;font-weight:700;color:var(--navy);margin-bottom:24px;line-height:1.4}
+.module-display h2{font-size:20px;font-weight:700;color:var(--navy);margin:28px 0 12px}
+.module-display h3{font-size:16px;font-weight:600;color:var(--navy);margin:20px 0 10px}
+.module-display p{color:var(--text);line-height:1.8;margin-bottom:16px;font-size:15px}
+.module-display ul{margin:12px 0 12px 20px;color:var(--text);line-height:1.8}
+.module-display ul li{margin-bottom:8px;font-size:15px}
+.module-display strong{color:var(--navy)}
+.highlight-box{background:rgba(10,31,68,.06);border-left:4px solid var(--navy);padding:20px;border-radius:0 8px 8px 0;margin:20px 0}
+.highlight-box.red{background:rgba(214,40,40,.06);border-left-color:var(--red)}
+.hierarchy{display:flex;flex-direction:column;align-items:center;gap:8px;margin:24px 0;padding:24px;background:var(--gray);border-radius:12px}
+.hierarchy-level{background:var(--navy);color:var(--white);padding:12px 24px;border-radius:8px;font-weight:600;text-align:center;min-width:200px}
+.hierarchy-arrow{color:var(--red);font-size:20px;font-weight:700}
+.process-flow{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.process-step{background:var(--navy);color:var(--white);padding:12px 20px;border-radius:8px;font-weight:600;text-align:center}
+.process-arrow{color:var(--red);font-size:18px;font-weight:700}
+.training-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--border)}
+.assessment-header{background:var(--navy);color:var(--white);padding:20px;position:sticky;top:70px;z-index:100}
+.assessment-header-inner{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:20px}
+.assessment-header h3{font-size:18px;font-weight:700;white-space:nowrap}
+.assessment-progress{flex:1;height:10px;background:rgba(255,255,255,.2);border-radius:5px;overflow:hidden}
+.assessment-progress-fill{height:100%;background:var(--red);border-radius:5px;transition:width .3s}
+.assessment-body{max-width:800px;margin:0 auto;padding:40px 20px;background:var(--gray);min-height:calc(100vh - 150px)}
+.question-card{background:var(--white);border-radius:16px;padding:40px;box-shadow:var(--shadow)}
+.question-number{font-size:14px;font-weight:600;color:var(--red);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+.question-text{font-size:18px;font-weight:600;color:var(--navy);margin-bottom:32px;line-height:1.6}
+.options-list{display:flex;flex-direction:column;gap:12px}
+.option-card{display:flex;align-items:flex-start;gap:16px;padding:18px 20px;border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:all .2s;background:var(--white)}
+.option-card:hover{border-color:var(--navy);background:rgba(10,31,68,.02)}
+.option-card.selected{border-color:var(--navy);background:rgba(10,31,68,.06)}
+.option-card.disabled{opacity:.6;pointer-events:none}
+.option-letter{width:36px;height:36px;border-radius:50%;background:var(--gray);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--navy);flex-shrink:0}
+.option-card.selected .option-letter{background:var(--navy);color:var(--white)}
+.option-text{font-size:15px;line-height:1.6;padding-top:6px}
+.results-section{max-width:700px;margin:0 auto;padding:60px 20px;text-align:center}
+.results-card{background:var(--white);border-radius:16px;padding:50px 40px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.score-ring{width:160px;height:160px;margin:0 auto 30px;position:relative}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring-bg{fill:none;stroke:var(--gray);stroke-width:8}
+.score-ring-fill{fill:none;stroke:var(--navy);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset 1s ease}
+.score-ring-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:36px;font-weight:700;color:var(--navy)}
+.status-badge{display:inline-block;padding:10px 28px;border-radius:50px;font-size:14px;font-weight:700;margin-bottom:20px}
+.status-cleared{background:rgba(46,204,113,.15);color:#27ae60}
+.status-retrain{background:rgba(241,196,15,.15);color:#f39c12}
+.status-failed{background:rgba(214,40,40,.15);color:var(--red)}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.active{display:flex}
+.certificate-container{background:var(--white);border-radius:8px;padding:40px;max-width:900px;width:100%;max-height:90vh;overflow-y:auto;text-align:center;position:relative}
+.certificate-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:28px;cursor:pointer;color:var(--light)}
+#certificate-print{background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%);border:8px double var(--navy);border-radius:8px;padding:40px;margin:20px auto;max-width:700px;position:relative}
+#certificate-print .cert-header{text-align:center;margin-bottom:30px}
+#certificate-print .cert-logo{height:60px;margin-bottom:10px}
+#certificate-print .cert-title{font-size:28px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:2px}
+#certificate-print .cert-subtitle{font-size:14px;color:var(--light);margin-top:8px;text-transform:uppercase;letter-spacing:3px}
+#certificate-print .cert-body{margin:40px 0}
+#certificate-print .cert-presented{font-size:14px;color:var(--light);margin-bottom:16px}
+#certificate-print .cert-name{font-size:32px;font-weight:700;color:var(--navy);border-bottom:2px solid var(--red);display:inline-block;padding:0 40px 8px;margin-bottom:24px}
+#certificate-print .cert-details{display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:left;margin-top:30px;font-size:14px}
+#certificate-print .cert-detail-item strong{color:var(--navy)}
+#certificate-print .cert-footer{display:flex;justify-content:space-between;margin-top:50px;padding-top:30px;border-top:1px solid #ccc}
+#certificate-print .cert-signature{text-align:center}
+#certificate-print .cert-signature-line{width:150px;height:2px;background:var(--navy);margin:0 auto 8px}
+#certificate-print .cert-signature-label{font-size:12px;color:var(--light);text-transform:uppercase;letter-spacing:1px}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--navy);color:var(--white);padding:14px 28px;border-radius:8px;font-size:14px;font-weight:500;z-index:3000;box-shadow:0 4px 20px rgba(0,0,0,.2);opacity:0;transition:opacity .3s}
+.toast.show{opacity:1}
+@media(max-width:1024px){.info-cards{grid-template-columns:repeat(3,1fr)}.info-card:nth-child(4),.info-card:nth-child(5){border-right:none}.modules-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){nav{display:none}.mobile-menu-btn{display:block}.hero-inner{flex-direction:column;text-align:center;padding:40px 20px}.hero-text p{margin:0 auto 30px}.hero-visual{display:none}.info-cards{grid-template-columns:1fr 1fr}.info-card{border-right:none!important;border-bottom:1px solid var(--gray);padding:16px 10px}.info-card:last-child{border-bottom:none}.about-grid{grid-template-columns:1fr;gap:40px}.modules-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.form-group.full{grid-column:1}.footer-grid{grid-template-columns:1fr}.training-nav{flex-direction:column;gap:12px}.training-nav .btn{width:100%;text-align:center}.process-flow{flex-direction:column;align-items:stretch}.process-arrow{text-align:center;transform:rotate(90deg)}}
+@media(max-width:480px){.info-cards{grid-template-columns:1fr}.question-card{padding:24px 20px}.question-text{font-size:16px}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.fade-in{animation:fadeIn .4s ease}
+</style>
+<header id="main-header" class="hidden">
+  <div class="header-inner">
+    <div class="logo-area">
+      <img src="acl.png" alt="ACL Logo" onerror="this.style.display='none'">
+      <span class="logo-text">ADVENWARE CAREER LINK</span>
+    </div>
+    <nav>
+      <a href="#" onclick="navigateTo('landing');return false">Overview</a>
+      <a href="#modules-preview">What You'll Learn</a>
+      <a href="#about">Details</a>
+      <a href="#faq">FAQ</a>
+      <button class="btn btn-primary" onclick="startJourney()">Get Started</button>
+    </nav>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">&#9776;</button>
+  </div>
+</header>
+
+<div id="landing-page" class="page active">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1>CANDIDATE READINESS,<br>PROFESSIONALISM &<br>WORKPLACE CONDUCT <span>TRAINING</span></h1>
+        <p>Prepare yourself for success in any professional environment. Build the mindset, skills and habits that organizations value.</p>
+        <button class="btn btn-red" onclick="startJourney()" style="font-size:16px;padding:16px 36px">Start Training Now &rarr;</button>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-illustration">
+          <div class="circle c1"></div>
+          <div class="circle c2"></div>
+          <div class="circle c3"></div>
+          <div class="hero-icon">&#128188;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="icon">&#9201;</div>
+        <h4>Duration</h4>
+        <p>Approximately<br><strong>30 minutes</strong></p>
+      </div>
+      <div class="info-card">
+        <div class="icon">&#9997;</div>
+        <h4>Assessment</h4>
+        <p><strong>25 questions</strong></p>
+      </div>
+      <div class="info-card">
+        <div class="icon">&#127919;</div>
+        <h4>Recommended Pass Mark</h4>
+        <p><strong>70%</strong></p>
+      </div>
+      <div class="info-card">
+        <div class="icon">&#9989;</div>
+        <h4>Status</h4>
+        <p><strong>Mandatory before placement</strong></p>
+      </div>
+      <div class="info-card">
+        <div class="icon">&#128101;</div>
+        <h4>Target Candidates</h4>
+        <p>Attachment Students | Interns | Job Seekers</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="about-section" id="about">
+    <div class="about-grid">
+      <div>
+        <h2 class="section-title">ABOUT THIS TRAINING</h2>
+        <div class="about-text">
+          <p>This training is designed to prepare candidates for attachment, internship and employment by strengthening professional behavior, workplace conduct, and ethical decision-making.</p>
+          <p>Successful completion demonstrates your readiness to represent yourself, your institution and the Advenware Career Link program with integrity and professionalism.</p>
+        </div>
+      </div>
+      <div class="about-card">
+        <h3>YOU WILL LEARN ABOUT:</h3>
+        <ul>
+          <li>Understanding your role as an ACL candidate</li>
+          <li>Professionalism in the workplace</li>
+          <li>Workplace ethics and integrity</li>
+          <li>Communication and teamwork</li>
+          <li>Workplace conduct and responsibility</li>
+          <li>Hierarchy, authority and reporting</li>
+          <li>Handling real workplace situations</li>
+          <li>Professional judgment and decision-making</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="modules-section" id="modules-preview">
+    <h2 class="section-title">TRAINING MODULES</h2>
+    <div class="modules-grid" id="modules-grid"></div>
+  </section>
+
+  <section class="faq-section" id="faq">
+    <h2 class="section-title">FREQUENTLY ASKED QUESTIONS</h2>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">What is the purpose of this training?</button>
+      <div class="faq-answer"><p>The training prepares candidates for professional conduct in the workplace, covering ethics, communication, hierarchy, and real workplace situations.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">How long does the training take?</button>
+      <div class="faq-answer"><p>The training takes approximately 30 minutes to complete, including all six modules and the final assessment.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">What is the pass mark for the assessment?</button>
+      <div class="faq-answer"><p>You must score 70% or higher to be cleared. This means you need to answer at least 18 out of 25 questions correctly.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">What happens if I fail the assessment?</button>
+      <div class="faq-answer"><p>If you score below 70%, you will need to review the training material and retake the assessment. Scores between 50-69% require retraining, while below 50% requires additional guidance.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Is the certificate downloadable?</button>
+      <div class="faq-answer"><p>Yes. Candidates who score 70% or higher can download a professional PDF certificate of completion.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Can I save my progress and return later?</button>
+      <div class="faq-answer"><p>Yes, your progress is automatically saved. You can return to the training at any time and resume from where you left off.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>ADVENWARE CAREER LINK</h4>
+          <p style="font-size:14px;line-height:1.7">Preparing candidates for professional success. Building the mindset, skills and habits that organizations value.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <a href="#" onclick="navigateTo('landing');return false">Overview</a>
+          <a href="#modules-preview">Training</a>
+          <a href="#" onclick="startJourney();return false">Assessment</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer-col">
+          <h4>Training</h4>
+          <a href="#">Module 1</a>
+          <a href="#">Module 2</a>
+          <a href="#">Module 3</a>
+          <a href="#">Module 4</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="#">support@advenwarecareerlink.com</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Advenware Career Link. All rights reserved. | Confidentiality & Privacy Statement</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div id="candidate-page" class="page">
+  <div class="page-content">
+    <div class="candidate-section">
+      <h2 class="section-title">Candidate Information</h2>
+      <p class="subtitle">Please fill in your details to begin the training.</p>
+      <div class="form-card">
+        <form id="candidate-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" id="fullName" required>
+              <div class="error-msg">Please enter your full name</div>
+            </div>
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="tel" id="phone" required>
+              <div class="error-msg">Please enter a valid phone number</div>
+            </div>
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" id="email" required>
+              <div class="error-msg">Please enter a valid email address</div>
+            </div>
+            <div class="form-group">
+              <label>Institution *</label>
+              <input type="text" id="institution" required>
+              <div class="error-msg">Please enter your institution</div>
+            </div>
+            <div class="form-group">
+              <label>Course/Programme *</label>
+              <input type="text" id="course" required>
+              <div class="error-msg">Please enter your course/programme</div>
+            </div>
+            <div class="form-group">
+              <label>Level of Study *</label>
+              <select id="level" required>
+                <option value="">Select level</option>
+                <option>Certificate</option>
+                <option>Diploma</option>
+                <option>Undergraduate</option>
+                <option>Postgraduate</option>
+                <option>Other</option>
+              </select>
+              <div class="error-msg">Please select your level of study</div>
+            </div>
+            <div class="form-group">
+              <label>Training Category *</label>
+              <select id="category" required>
+                <option value="">Select category</option>
+                <option>Attachment</option>
+                <option>Internship</option>
+                <option>Job Placement</option>
+              </select>
+              <div class="error-msg">Please select a training category</div>
+            </div>
+            <div class="form-group">
+              <label>Preferred Placement Field</label>
+              <input type="text" id="field" placeholder="e.g. IT, Finance, Marketing">
+            </div>
+            <div class="form-group">
+              <label>Emergency Contact Name *</label>
+              <input type="text" id="emergencyName" required>
+              <div class="error-msg">Please enter emergency contact name</div>
+            </div>
+            <div class="form-group">
+              <label>Emergency Contact Phone *</label>
+              <input type="tel" id="emergencyPhone" required>
+              <div class="error-msg">Please enter emergency contact phone</div>
+            </div>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="declaration">
+            <label for="declaration">I confirm that the information provided is accurate and that I understand that this training is intended to prepare me for professional conduct in an organization. I understand that successful completion of this training does not by itself guarantee placement.</label>
+          </div>
+          <div class="error-msg" id="declaration-error" style="margin-top:10px">You must accept the declaration to proceed</div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" onclick="navigateTo('landing')">Cancel</button>
+            <button type="submit" class="btn btn-primary">Begin Training &rarr;</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="training-page" class="page">
+  <div class="training-header">
+    <div class="training-header-inner">
+      <h2 id="training-module-title">Module 1</h2>
+      <div class="training-meta">
+        <span id="training-progress-text">Module 1 of 6</span>
+        <div class="progress-mini"><div class="progress-mini-fill" id="training-progress-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="training-content">
+    <div class="module-display" id="module-content"></div>
+    <div class="training-nav">
+      <button class="btn btn-outline" id="prev-module-btn" onclick="changeModule(-1)">&larr; Previous</button>
+      <button class="btn btn-primary" id="next-module-btn" onclick="handleNextModule()">Next Module &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<div id="assessment-page" class="page">
+  <div class="assessment-header">
+    <div class="assessment-header-inner">
+      <h3 id="assessment-q-text">Question 1 of 25</h3>
+      <div class="assessment-progress"><div class="assessment-progress-fill" id="assessment-progress-bar" style="width:4%"></div></div>
+    </div>
+  </div>
+  <div class="assessment-body">
+    <div class="question-card fade-in" id="question-card"></div>
+  </div>
+</div>
+
+<div id="results-page" class="page">
+  <div class="page-content">
+    <div class="results-section" id="results-content"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="cert-modal">
+  <div class="certificate-container">
+    <button class="certificate-close" onclick="closeCertModal()">&times;</button>
+    <div id="certificate-print"></div>
+    <div style="margin-top:20px">
+      <button class="btn btn-primary" onclick="downloadCertificate()">Download Certificate PDF</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STORAGE_KEY='acl_training_data_v2';
+let candidate={};
+let currentModule=0;
+let currentQuestion=0;
+let answers={};
+let score=0;
+let assessmentSubmitted=false;
+const modules=[
+{title:'MODULE 1 — UNDERSTANDING YOUR ROLE AS AN ACL CANDIDATE',html:`<p>Being selected for attachment, internship or employment is an opportunity to demonstrate knowledge, character, discipline and ability to work with others.</p><p>Workplace responsibility differs from classroom responsibility. Candidates are expected to:</p><ul><li>Report as required</li><li>Follow reasonable instructions</li><li>Respect supervisors and colleagues</li><li>Communicate professionally</li><li>Protect confidential information</li><li>Take responsibility for actions</li><li>Ask questions when something is not understood</li><li>Maintain appropriate appearance and behaviour</li><li>Respect workplace policies</li><li>Learn from mistakes and accept correction</li></ul><div class="highlight-box red"><strong>Mindset:</strong> Learn &rarr; Demonstrate &rarr; Build Trust &rarr; Gain Experience &rarr; Build Your Career</div><p>Sometimes a candidate may receive a simple task that appears below their academic level. Simple tasks can be used to assess reliability before greater responsibilities are given. Approach every task with professionalism and attention to detail.</p>`},
+{title:'MODULE 2 — PROFESSIONALISM',html:`<p><strong>Professionalism is the way you conduct yourself in a professional environment.</strong></p><p>Professionalism involves more than formal clothing. It is demonstrated through daily actions and decisions.</p><h2>Key Elements of Professionalism</h2><ul><li><strong>Punctuality</strong> &mdash; Arrive on time and ready to work</li><li><strong>Reliability</strong> &mdash; Do what you say you will do</li><li><strong>Communication</strong> &mdash; Clear, respectful and appropriate</li><li><strong>Respect</strong> &mdash; Treat everyone with courtesy</li><li><strong>Appearance</strong> &mdash; Dress appropriately for the workplace</li><li><strong>Attitude</strong> &mdash; Positive and cooperative</li><li><strong>Responsibility</strong> &mdash; Own your actions and outcomes</li><li><strong>Discipline</strong> &mdash; Follow rules and procedures</li><li><strong>Confidentiality</strong> &mdash; Protect sensitive information</li><li><strong>Teamwork</strong> &mdash; Work well with others</li><li><strong>Adaptability</strong> &mdash; Adjust to change positively</li><li><strong>Willingness to learn</strong> &mdash; Seek growth and improvement</li></ul><h2>Punctuality</h2><p>If you are expected at 8:00 AM, arriving exactly at 8:00 AM should not become the normal target. Consider preparation time, transport and possible delays.</p><p>If unavoidable lateness occurs, communicate as early as possible.</p><h2>Professional Communication</h2><p>Professional communication should be:</p><ul><li><strong>Clear</strong> &mdash; Express ideas understandably</li><li><strong>Respectful</strong> &mdash; Courteous in tone and delivery</li><li><strong>Relevant</strong> &mdash; Stay on topic</li><li><strong>Timely</strong> &mdash; Respond within appropriate timeframes</li><li><strong>Appropriate</strong> &mdash; Suitable to the situation</li></ul><p>Maintain appropriate appearance and use your mobile phone professionally during work hours.</p>`},
+{title:'MODULE 3 — WORKPLACE ETHICS',html:`<p><strong>Ethics are principles that guide people to distinguish appropriate conduct from inappropriate conduct.</strong></p><p>Professional character is demonstrated even when nobody is watching.</p><h2>Honesty</h2><p>Honesty is required in all aspects of workplace activity, including:</p><ul><li>Attendance records</li><li>Reports and documentation</li><li>Work records and timesheets</li><li>Academic information</li><li>Client information</li><li>Working hours</li></ul><p>Reporting mistakes early is always better than hiding them. Transparency builds trust and allows problems to be corrected quickly.</p><h2>Confidentiality</h2><p>Confidential information must be protected at all times. This includes:</p><ul><li>Client information</li><li>Passwords and access credentials</li><li>Financial information</li><li>Personal records</li><li>Business strategies and plans</li><li>Internal documents and reports</li><li>Private conversations</li></ul><p>Confidential information must not be photographed, posted on social media or shared with friends or family.</p><h2>Organizational Property</h2><p>Organizational property must be respected and protected:</p><ul><li>Computers and equipment</li><li>Tools and machinery</li><li>Vehicles</li><li>Money and financial assets</li><li>Documents and records</li></ul><h2>Gifts and Favours</h2><p>Accepting gifts or favours can create conflicts of interest. Always follow the organization's policy regarding gifts and payments. When in doubt, disclose the offer or seek guidance from a supervisor.</p>`},
+{title:'MODULE 4 — CODE OF CONDUCT',html:`<p><strong>A Code of Conduct establishes expected standards of behaviour for all members of an organization.</strong></p><p>Understanding and following the Code of Conduct is essential for maintaining a professional and respectful workplace.</p><h2>Standards of Behaviour</h2><ul><li>Respect people.</li><li>Follow lawful and reasonable instructions.</li><li>Avoid harassment and discrimination.</li><li>Protect organizational property.</li><li>Maintain confidentiality.</li><li>Avoid violence and threatening behaviour.</li><li>Avoid unauthorized absence.</li><li>Avoid substance abuse at the workplace.</li><li>Use organizational resources responsibly.</li><li>Maintain professional communication.</li><li>Follow workplace procedures.</li></ul><h2>Social Media Guidance</h2><p>Social media use must be carefully managed in a professional context. Photographs or posts can unintentionally expose:</p><ul><li>Confidential information</li><li>Internal documents</li><li>Clients and customers</li><li>Security arrangements</li><li>Company information and strategies</li></ul><p>Always think carefully before posting anything related to your workplace, colleagues, clients or organizational activities.</p><h2>Workplace Conflict</h2><p>Professionalism means handling disagreements without:</p><ul><li>Insults or personal attacks</li><li>Threats or intimidation</li><li>Violence or physical confrontation</li><li>Public humiliation</li><li>Social media attacks</li><li>Gossip campaigns</li></ul><p>Use appropriate reporting structures when concerns need to be escalated. Address issues through proper channels rather than informal or destructive methods.</p>`},
+{title:'MODULE 5 — HIERARCHY, AUTHORITY & REPORTING',html:`<p>Every organization has a structure that defines roles, responsibilities and reporting lines. Understanding this structure is essential for professional operation.</p><h2>Organizational Hierarchy</h2><div class="hierarchy"><div class="hierarchy-level">Candidate / Intern / Attachment Student</div><div class="hierarchy-arrow">&#8595;</div><div class="hierarchy-level">Immediate Supervisor</div><div class="hierarchy-arrow">&#8595;</div><div class="hierarchy-level">Department / Section Head</div><div class="hierarchy-arrow">&#8595;</div><div class="hierarchy-level">Management</div><div class="hierarchy-arrow">&#8595;</div><div class="hierarchy-level">Senior Management / Directorate</div></div><p>Exact structures vary between organizations, but the principle of structured reporting remains consistent.</p><h2>Why Hierarchy Matters</h2><ul><li>Allocate responsibility clearly</li><li>Make decisions at appropriate levels</li><li>Resolve problems efficiently</li><li>Maintain accountability</li><li>Coordinate across departments</li><li>Protect organizational processes</li></ul><h2>Role of the Immediate Supervisor</h2><p>The supervisor is normally the first point of reference for:</p><ul><li>Daily assignments and tasks</li><li>Attendance and punctuality</li><li>Work instructions and guidance</li><li>Challenges and difficulties</li><li>Clarifications on tasks</li><li>Permission for leave or changes</li><li>Performance-related matters</li></ul><h2>Escalation</h2><p>Sometimes escalation may be necessary. This should be done through appropriate channels and for valid reasons.</p><div class="highlight-box red"><strong>Important:</strong> Hierarchy should never be used to protect misconduct. If you observe wrongdoing, report it through the appropriate channel.</div>`},
+{title:'MODULE 6 — HANDLING REAL WORKPLACE SITUATIONS',html:`<p>In the workplace, candidates may encounter a wide range of situations that require professional judgment and appropriate responses.</p><h2>Common Situations</h2><p>Candidates may encounter:</p><ul><li>Difficult colleagues</li><li>Demanding supervisors</li><li>Confused or upset clients</li><li>Mistakes and errors</li><li>Instructions they do not understand</li><li>Emergencies</li><li>Disagreements</li><li>Tasks they have never performed before</li></ul><h2>Decision-Making Process</h2><div class="process-flow"><div class="process-step">Pause</div><div class="process-arrow">&rarr;</div><div class="process-step">Understand</div><div class="process-arrow">&rarr;</div><div class="process-step">Communicate</div><div class="process-arrow">&rarr;</div><div class="process-step">Act Appropriately</div></div><h2>Receiving Criticism</h2><p>When receiving criticism or correction:</p><ul><li>Listen carefully without interrupting</li><li>Seek to understand the feedback</li><li>Ask clarifying questions if needed</li><li>Thank the person for the feedback</li><li>Use the feedback to improve</li></ul><h2>Making Mistakes</h2><div class="highlight-box red"><strong>Mistake Protocol:</strong> Recognize &rarr; Report &rarr; Correct &rarr; Learn</div><p>When you make a mistake:</p><ul><li>Recognize it promptly</li><li>Report it to the appropriate person</li><li>Cooperate in correcting the situation</li><li>Learn from the experience</li></ul><h2>Asking Questions</h2><p>Asking a reasonable question is better than confidently doing the wrong thing. However, first make a reasonable effort to understand the task before asking for help. This demonstrates initiative and problem-solving ability.</p>`}
+];
+
+const questions=[
+{text:"You are expected at your attachment station at 8:00 AM. At 7:35 AM, you realize that an unexpected transport problem will probably make you late. What is the most professional action?",options:["Arrive whenever you manage and explain later.","Wait until you arrive before saying anything.","Inform the appropriate supervisor as early as possible and communicate your estimated arrival time.","Decide not to report because you will already be late."],correct:2},
+{text:"Your supervisor gives you a task that appears very simple compared with what you studied in college. What would demonstrate the best professional attitude?",options:["Tell the supervisor that the task is below your qualifications.","Complete the task properly and use the opportunity to understand the organization's processes.","Ask another student to do it because it is too simple.","Do it carelessly so that you can be given something more difficult."],correct:1},
+{text:"You notice that your colleague frequently leaves the office early without permission. What is the most appropriate response?",options:["Start leaving early too.","Tell other colleagues so everyone knows what is happening.","Follow the appropriate reporting procedure if the matter genuinely affects the workplace, rather than turning it into gossip.","Post about it on social media."],correct:2},
+{text:"Your supervisor corrects you in front of another employee after you make a mistake. What is the most professional initial response?",options:["Argue immediately to prove that you were right.","Insult the supervisor after work.","Listen, understand what went wrong and seek clarification if necessary.","Stop performing the task because you feel disrespected."],correct:2},
+{text:"You receive access to a workplace computer containing information about several clients. Your friend asks you to show them some of the information because they are curious. What should you do?",options:["Show them only the interesting parts.","Take photographs but do not send them.","Refuse to disclose the information and follow confidentiality requirements.","Show them because they are your personal friend."],correct:2},
+{text:"A client offers you money after you help them. Your organization has rules regarding gifts and payments. What should guide your response?",options:["Accept it secretly because nobody may find out.","Accept it if the amount is small.","Follow the organization's policy and, where necessary, disclose or seek guidance regarding the offer.","Ask the client to give you more."],correct:2},
+{text:"You are given an assignment but do not fully understand one important part of the instructions. What should you do?",options:["Pretend you understand and hope everything works out.","Ask for clarification before proceeding with the unclear part.","Ignore that part of the assignment.","Ask someone outside the organization to decide for you."],correct:1},
+{text:"You disagree with your immediate supervisor about how a task should be completed. There is no immediate danger or serious misconduct involved. What is the most appropriate first step?",options:["Immediately complain to the director.","Discuss your concern respectfully with your supervisor.","Ignore the supervisor and use your preferred method.","Tell other employees that the supervisor is incompetent."],correct:1},
+{text:"You accidentally delete an important file while working. What should you do?",options:["Hide the mistake.","Blame the previous person who used the computer.","Report the mistake promptly and cooperate in recovering or correcting the situation.","Leave the workplace before anyone notices."],correct:2},
+{text:"A colleague asks you to sign an attendance record indicating that they were present when they were actually absent. What is the most appropriate response?",options:["Sign because they are your friend.","Sign this time but refuse next time.","Decline and maintain accurate records.","Ask them for a favour in return."],correct:2},
+{text:"During lunch break, you see an internal document on a desk containing information about a client. What should you do?",options:["Read it because it is already visible.","Photograph it for future reference.","Respect its confidentiality and avoid accessing or sharing information that you are not authorized to handle.","Send it to another trainee."],correct:2},
+{text:"Your phone receives several personal messages while you are serving a client. What would be the most professional approach?",options:["Continue chatting while the client waits.","Ignore the client completely until you finish the conversation.","Prioritize the client and handle personal communication at an appropriate time.","Ask the client to wait while you make a personal phone call."],correct:2},
+{text:"A customer becomes angry because of a delay that was not directly caused by you. What should you do first?",options:["Tell the customer that the problem is not your fault.","Respond angrily because the customer is being disrespectful.","Remain calm, listen and follow the organization's procedure for handling the complaint.","Record the customer and post the incident online."],correct:2},
+{text:"You are asked to perform a task using equipment you have never used before. What demonstrates professional judgment?",options:["Use it immediately without asking anyone.","Refuse to learn it.","Seek appropriate guidance or training before using it.","Ask another trainee to use it while you watch."],correct:2},
+{text:"You discover that another trainee has made a serious mistake. They ask you not to tell anyone because they are afraid of being punished. What should you consider?",options:["Always protect your friend regardless of the consequences.","Ignore the matter.","Encourage them to report and correct the mistake through the appropriate process.","Tell everyone in the office."],correct:2},
+{text:"Your supervisor is away, and another senior employee asks you to assist with a task. What should you consider before proceeding?",options:["Refuse every instruction from anyone other than your supervisor.","Consider whether the instruction is legitimate and within the organization's procedures, and communicate with your supervisor where necessary.","Do anything because the person is senior.","Ask another student to decide."],correct:1},
+{text:"You are unhappy with how you were treated at your workplace. What is the most constructive approach?",options:["Immediately attack the organization on social media.","Discuss the matter through the appropriate reporting or grievance channel.","Stop attending without informing anyone.","Encourage other trainees to boycott the organization."],correct:1},
+{text:"Your supervisor gives you several tasks with deadlines that appear difficult to meet. What should you do?",options:["Say nothing and submit everything late.","Decide which tasks you personally like and ignore the rest.","Communicate early, clarify priorities and discuss realistic timelines.","Complain to other employees."],correct:2},
+{text:"You are invited by colleagues to join a conversation where they are mocking another employee. What is the most professional approach?",options:["Join because you want to fit in.","Record the conversation.","Avoid participating in harmful gossip and maintain professional boundaries.","Add more information about the employee."],correct:2},
+{text:"You finish your assigned work earlier than expected. What could demonstrate initiative?",options:["Leave the workplace without informing anyone.","Spend the remaining time on personal social media.","Ask whether there are additional tasks, learning opportunities or ways you can assist.","Distract other trainees."],correct:2},
+{text:"You receive an instruction from a supervisor that you believe may violate an important organizational policy. What should you do?",options:["Follow it immediately because supervisors can never be questioned.","Publicly accuse the supervisor of misconduct.","Seek clarification and use the appropriate reporting/escalation channel if the concern remains.","Post the instruction online."],correct:2},
+{text:"A friend asks you what your organization does and wants to know details about a client you are working with. What should you do?",options:["Tell them everything because they are your friend.","Share only information that you are authorized to disclose.","Send them internal documents.","Take screenshots and send them privately."],correct:1},
+{text:"You are running late because you overslept. What would demonstrate responsibility?",options:["Invent a medical emergency.","Say that traffic caused the delay even though it did not.","Communicate honestly and accept responsibility for the lateness.","Avoid reporting that day."],correct:2},
+{text:"After completing your attachment, you realize that one of your supervisors has been particularly helpful to you. What is an appropriate way to show appreciation?",options:["Give the supervisor confidential information from another organization.","Thank them professionally and acknowledge the guidance they provided.","Post private details about them online.","Offer them money regardless of organizational policy."],correct:1},
+{text:"You are offered an opportunity to handle a responsibility that is beyond your current experience. You are interested but unsure whether you can perform it successfully. What response demonstrates the strongest professional mindset?",options:["Pretend that you already know everything.","Refuse immediately because you have never done it before.","Express willingness to learn, clarify expectations and seek appropriate guidance while taking responsibility for the task.","Ask another trainee to do it without informing your supervisor."],correct:2}
+];
+
+function saveData(){
+  const data={candidate,currentModule,currentQuestion,answers,score,assessmentSubmitted,completed:currentModule>=modules.length-1&&assessmentSubmitted};
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+}
+
+function loadData(){
+  const raw=localStorage.getItem(STORAGE_KEY);
+  if(!raw)return false;
+  try{
+    const data=JSON.parse(raw);
+    candidate=data.candidate||{};
+    currentModule=data.currentModule||0;
+    currentQuestion=data.currentQuestion||0;
+    answers=data.answers||{};
+    score=data.score||0;
+    assessmentSubmitted=data.assessmentSubmitted||false;
+    return data.completed||false;
+  }catch(e){return false;}
+}
+
+function navigateTo(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(page+'-page').classList.add('active');
+  window.scrollTo(0,0);
+  document.getElementById('main-header').classList.remove('hidden');
+}
+
+function startJourney(){
+  const hasProgress=loadData();
+  if(hasProgress&&candidate.fullName){
+    if(confirm('Previous progress found. Resume training or start fresh?')){
+      if(currentModule>=modules.length){showResults();}else{showModule(currentModule);navigateTo('training');}
+    }else{
+      localStorage.removeItem(STORAGE_KEY);
+      navigateTo('candidate');
+    }
+  }else{
+    navigateTo('candidate');
+  }
+}
+
+function toggleMobileMenu(){
+  const nav=document.querySelector('nav');
+  if(nav.style.display==='flex'){nav.style.display='none';}else{nav.style.display='flex';nav.style.flexDirection='column';nav.style.position='absolute';nav.style.top='70px';nav.style.left='0';nav.style.right='0';nav.style.background='var(--white)';nav.style.padding='20px';nav.style.boxShadow='0 4px 10px rgba(0,0,0,.05)';}
+}
+
+function toggleFaq(btn){
+  const item=btn.parentElement;
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen)item.classList.add('open');
+}
+
+function renderModuleCards(){
+  const grid=document.getElementById('modules-grid');
+  grid.innerHTML=modules.map((m,i)=>`<div class="module-card"><span class="mod-num">Module ${i+1}</span><h3>${m.title.split('—')[1]?m.title.split('—')[1].trim():m.title}</h3><p>Professional workplace conduct and readiness training.</p></div>`).join('');
+}
+
+document.getElementById('candidate-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  const fields=['fullName','phone','email','institution','course','level','category','emergencyName','emergencyPhone'];
+  let valid=true;
+  fields.forEach(f=>{
+    const input=document.getElementById(f);
+    const error=input.parentElement.querySelector('.error-msg');
+    if(!input.value.trim()){error.style.display='block';valid=false;}else{error.style.display='none';}
+  });
+  if(!document.getElementById('declaration').checked){document.getElementById('declaration-error').style.display='block';valid=false;}else{document.getElementById('declaration-error').style.display='none';}
+  if(!valid)return;
+  candidate={fullName:document.getElementById('fullName').value,phone:document.getElementById('phone').value,email:document.getElementById('email').value,institution:document.getElementById('institution').value,course:document.getElementById('course').value,level:document.getElementById('level').value,category:document.getElementById('category').value,field:document.getElementById('field').value,emergencyName:document.getElementById('emergencyName').value,emergencyPhone:document.getElementById('emergencyPhone').value};
+  saveData();
+  currentModule=0;
+  showModule(0);
+  navigateTo('training');
+});
+
+function showModule(index){
+  currentModule=index;
+  const mod=modules[index];
+  document.getElementById('training-module-title').textContent=mod.title;
+  document.getElementById('module-content').innerHTML=mod.html;
+  document.getElementById('training-progress-text').textContent='Module '+(index+1)+' of '+modules.length;
+  document.getElementById('training-progress-bar').style.width=((index)/(modules.length)*100)+'%';
+  document.getElementById('prev-module-btn').style.visibility=index===0?'hidden':'visible';
+  document.getElementById('next-module-btn').textContent=index===modules.length-1?'Proceed to Assessment \u2192':'Next Module \u2192';
+  saveData();
+}
+
+function changeModule(dir){
+  const newIndex=currentModule+dir;
+  if(newIndex<0||newIndex>=modules.length)return;
+  showModule(newIndex);
+}
+
+function handleNextModule(){
+  if(currentModule>=modules.length-1){
+    startAssessment();
+  }else{
+    changeModule(1);
+  }
+}
+
+function startAssessment(){
+  currentQuestion=0;
+  assessmentSubmitted=false;
+  answers={};
+  score=0;
+  saveData();
+  showQuestion(0);
+  navigateTo('assessment');
+}
+
+function showQuestion(index){
+  currentQuestion=index;
+  const q=questions[index];
+  document.getElementById('assessment-q-text').textContent='Question '+(index+1)+' of '+questions.length;
+  document.getElementById('assessment-progress-bar').style.width=(((index+1)/questions.length)*100)+'%';
+  const card=document.getElementById('question-card');
+  card.className='question-card fade-in';
+  const letters=['A','B','C','D'];
+  card.innerHTML='<div class="question-number">Question '+(index+1)+' of '+questions.length+'</div><div class="question-text">'+q.text+'</div><div class="options-list">'+q.options.map((opt,i)=>'<div class="option-card'+(answers[index]===i?' selected':'')+'" onclick="selectAnswer('+i+')"><div class="option-letter">'+letters[i]+'</div><div class="option-text">'+opt+'</div></div>').join('')+'</div>';
+  if(answers[index]!==undefined){card.querySelectorAll('.option-card').forEach(c=>c.classList.add('disabled'));}
+}
+
+function selectAnswer(index){
+  if(answers[currentQuestion]!==undefined)return;
+  answers[currentQuestion]=index;
+  saveData();
+  const card=document.getElementById('question-card');
+  card.querySelectorAll('.option-card').forEach(c=>c.classList.add('disabled'));
+  card.querySelectorAll('.option-card')[index].classList.add('selected');
+  setTimeout(()=>{
+    if(currentQuestion<questions.length-1){showQuestion(currentQuestion+1);}else{assessmentSubmitted=true;saveData();showResults();}
+  },600);
+}
+
+function calculateScore(){
+  score=0;
+  questions.forEach((q,i)=>{if(answers[i]===q.correct)score++;});
+  return score;
+}
+
+function showResults(){
+  calculateScore();
+  const total=questions.length;
+  const pct=Math.round((score/total)*100);
+  const circumference=2*Math.PI*70;
+  const offset=circumference-(pct/100)*circumference;
+  let status,statusClass,message;
+  if(pct>=70){status='CLEARED';statusClass='status-cleared';message='Candidate has demonstrated an acceptable understanding of professional conduct and workplace expectations.';}
+  else if(pct>=50){status='RETRAINING REQUIRED';statusClass='status-retrain';message='Candidate should review the training material and repeat the assessment.';}
+  else{status='NOT CLEARED';statusClass='status-failed';message='Candidate should undergo additional guidance before proceeding with placement.';}
+  const date=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const certNum='ACL-'+Date.now().toString(36).toUpperCase();
+  const html='<div class="results-card fade-in"><h2 style="font-size:28px;font-weight:700;color:var(--navy);margin-bottom:8px">ASSESSMENT COMPLETE</h2><p style="color:var(--light);margin-bottom:30px">Congratulations, '+((candidate.fullName||'Candidate'))+'!</p><div class="score-ring"><svg width="160" height="160"><circle class="score-ring-bg" cx="80" cy="80" r="70"></circle><circle class="score-ring-fill" cx="80" cy="80" r="70" stroke-dasharray="'+circumference+'" stroke-dashoffset="'+offset+'" style="stroke:'+(pct>=70?'#27ae60':pct>=50?'#f39c12':'var(--red)')+'"></circle></svg><div class="score-ring-text">'+pct+'%</div></div><div class="status-badge '+statusClass+'">'+status+'</div><p style="color:var(--light);margin-bottom:20px">'+message+'</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;text-align:left;font-size:14px"><div style="background:var(--gray);padding:16px;border-radius:8px"><strong style="color:var(--navy)">Score:</strong> '+score+' / '+total+'</div><div style="background:var(--gray);padding:16px;border-radius:8px"><strong style="color:var(--navy)">Correct:</strong> '+score+' questions</div><div style="background:var(--gray);padding:16px;border-radius:8px"><strong style="color:var(--navy)">Incorrect:</strong> '+(total-score)+' questions</div><div style="background:var(--gray);padding:16px;border-radius:8px"><strong style="color:var(--navy)">Status:</strong> '+status+'</div></div>'+(pct>=70?'<button class="btn btn-primary" onclick="openCertModal()" style="margin-top:20px">View Certificate</button>':'')+(pct<70&&pct>=50?'<button class="btn btn-outline" onclick="retakeAssessment()" style="margin-top:20px">Review Training & Retake Assessment</button>':'')+(pct<50?'<button class="btn btn-red" onclick="retakeAssessment()" style="margin-top:20px">Additional Guidance Required</button>':'')+'<button class="btn btn-outline" onclick="navigateTo(\'landing\')" style="margin-top:12px;margin-left:8px">Back to Home</button></div>';
+  document.getElementById('results-content').innerHTML=html;
+  navigateTo('results');
+}
+
+function retakeAssessment(){
+  currentQuestion=0;answers={};score=0;assessmentSubmitted=false;saveData();showQuestion(0);navigateTo('assessment');
+}
+
+function openCertModal(){
+  calculateScore();
+  const pct=Math.round((score/questions.length)*100);
+  if(pct<70){showToast('Certificate is only available for candidates who score 70% or higher');return;}
+  const date=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const certNum='ACL-'+Date.now().toString(36).toUpperCase();
+  const html='<div class="cert-header"><img src="acl.png" class="cert-logo" alt="ACL Logo" onerror="this.style.display=\'none\'"><div class="cert-title">Certificate of Completion</div><div class="cert-subtitle">Advenware Career Link</div></div><div class="cert-body"><div class="cert-presented">This certificate is proudly presented to</div><div class="cert-name">'+(candidate.fullName||'Candidate')+'</div><p style="font-size:16px;color:var(--text);margin-bottom:8px">For successfully completing the</p><p style="font-size:18px;font-weight:700;color:var(--navy)">Advenware Career Link<br>Candidate Readiness, Professionalism & Workplace Conduct Training</p><div class="cert-details"><div class="cert-detail-item"><strong>Candidate Name:</strong><br>'+(candidate.fullName||'N/A')+'</div><div class="cert-detail-item"><strong>Completion Date:</strong><br>'+date+'</div><div class="cert-detail-item"><strong>Score:</strong><br>'+pct+'%</div><div class="cert-detail-item"><strong>Status:</strong><br>CLEARED</div><div class="cert-detail-item"><strong>Certificate No:</strong><br>'+certNum+'</div><div class="cert-detail-item"><strong>Training Category:</strong><br>'+(candidate.category||'N/A')+'</div></div></div><div class="cert-footer"><div class="cert-signature"><div class="cert-signature-line"></div><div class="cert-signature-label">Authorized Signature</div></div><div class="cert-signature"><div class="cert-signature-line"></div><div class="cert-signature-label">Date</div></div></div>';
+  document.getElementById('certificate-print').innerHTML=html;
+  document.getElementById('cert-modal').classList.add('active');
+}
+
+function closeCertModal(){document.getElementById('cert-modal').classList.remove('active');}
+
+function downloadCertificate(){
+  const element=document.getElementById('certificate-print');
+  const btn=event.target;
+  btn.textContent='Generating PDF...';btn.disabled=true;
+  setTimeout(()=>{
+    html2canvas(element,{scale:2,useCORS:true,backgroundColor:'#ffffff'}).then(canvas=>{
+      const{jsPDF}=window.jspdf;
+      const pdf=new jsPDF('landscape','mm','a4');
+      const imgData=canvas.toDataURL('image/jpeg',0.95);
+      const pdfWidth=pdf.internal.pageSize.getWidth();
+      const pdfHeight=pdf.internal.pageSize.getHeight();
+      pdf.addImage(imgData,'JPEG',0,0,pdfWidth,pdfHeight);
+      pdf.save('ACL_Certificate_'+((candidate.fullName||'Candidate').replace(/\\s+/g,'_'))+'.pdf');
+      btn.textContent='Download Certificate PDF';btn.disabled=false;
+      showToast('Certificate downloaded successfully!');
+    }).catch(()=>{
+      btn.textContent='Download Certificate PDF';btn.disabled=false;
+      showToast('Error generating PDF. Please try again.');
+    });
+  },300);
+}
+
+function showToast(msg){
+  const toast=document.getElementById('toast');
+  toast.textContent=msg;
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),3000);
+}
+
+function init(){
+  renderModuleCards();
+  const hasProgress=loadData();
+  if(hasProgress&&candidate.fullName){
+    if(currentModule>=modules.length&&assessmentSubmitted){showResults();}
+    else if(currentModule<modules.length){showModule(currentModule);navigateTo('training');}
+  }
+}
+
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
