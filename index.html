@@ -45,6 +45,7 @@ nav a:hover{color:var(--red)}
 .hero-illustration .c2{width:220px;height:220px;background:rgba(214,40,40,.15);top:50%;left:50%;transform:translate(-50%,-50%)}
 .hero-illustration .c3{width:160px;height:160px;background:rgba(255,255,255,.08);top:50%;left:50%;transform:translate(-50%,-50%)}
 .hero-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:80px;color:rgba(255,255,255,.2)}
+.hero-logo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:90%;z-index:2;filter:drop-shadow(0 4px 20px rgba(0,0,0,.3));}
 .info-section{max-width:1200px;margin:-60px auto 0;padding:0 20px;position:relative;z-index:10}
 .info-cards{background:var(--white);border-radius:16px;box-shadow:var(--shadow);padding:40px;display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
 .info-card{text-align:center;padding:20px 10px;border-right:1px solid var(--gray)}
@@ -87,6 +88,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.8);padding:60px 20px 30px}
 .candidate-section{max-width:700px;margin:0 auto;padding:60px 20px}
 .candidate-section .section-title{font-size:32px;margin-bottom:10px}
 .candidate-section .subtitle{color:var(--light);margin-bottom:30px}
+.candidate-logo{height:60px;width:auto;display:block;margin:0 auto 20px}
 .form-card{background:var(--white);border-radius:16px;padding:40px;box-shadow:var(--shadow);border:1px solid var(--border)}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .form-group{margin-bottom:20px}
@@ -102,6 +104,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.8);padding:60px 20px 30px}
 .training-header{background:var(--navy);color:var(--white);padding:30px 20px}
 .training-header-inner{max-width:800px;margin:0 auto}
 .training-header h2{font-size:24px;font-weight:700;margin-bottom:8px}
+.training-logo{height:36px;width:auto;display:inline-block;vertical-align:middle;margin-right:12px}
 .training-meta{display:flex;align-items:center;gap:20px;font-size:14px;color:rgba(255,255,255,.8)}
 .progress-mini{flex:1;height:8px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden}
 .progress-mini-fill{height:100%;background:var(--red);border-radius:4px;transition:width .3s}
@@ -114,6 +117,9 @@ footer{background:var(--navy);color:rgba(255,255,255,.8);padding:60px 20px 30px}
 .module-display ul{margin:12px 0 12px 20px;color:var(--text);line-height:1.8}
 .module-display ul li{margin-bottom:8px;font-size:15px}
 .module-display strong{color:var(--navy)}
+.about-logo{height:50px;width:auto;margin-bottom:16px;display:block}
+.section-logo{height:36px;width:auto;margin-bottom:12px;display:inline-block;vertical-align:middle}
+.modules-header{display:flex;align-items:center;gap:16px;margin-bottom:8px}
 .highlight-box{background:rgba(10,31,68,.06);border-left:4px solid var(--navy);padding:20px;border-radius:0 8px 8px 0;margin:20px 0}
 .highlight-box.red{background:rgba(214,40,40,.06);border-left-color:var(--red)}
 .hierarchy{display:flex;flex-direction:column;align-items:center;gap:8px;margin:24px 0;padding:24px;background:var(--gray);border-radius:12px}
@@ -172,8 +178,55 @@ footer{background:var(--navy);color:rgba(255,255,255,.8);padding:60px 20px 30px}
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--navy);color:var(--white);padding:14px 28px;border-radius:8px;font-size:14px;font-weight:500;z-index:3000;box-shadow:0 4px 20px rgba(0,0,0,.2);opacity:0;transition:opacity .3s}
 .toast.show{opacity:1}
 @media(max-width:1024px){.info-cards{grid-template-columns:repeat(3,1fr)}.info-card:nth-child(4),.info-card:nth-child(5){border-right:none}.modules-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:768px){nav{display:none}.mobile-menu-btn{display:block}.hero-inner{flex-direction:column;text-align:center;padding:40px 20px}.hero-text p{margin:0 auto 30px}.hero-visual{display:none}.info-cards{grid-template-columns:1fr 1fr}.info-card{border-right:none!important;border-bottom:1px solid var(--gray);padding:16px 10px}.info-card:last-child{border-bottom:none}.about-grid{grid-template-columns:1fr;gap:40px}.modules-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.form-group.full{grid-column:1}.footer-grid{grid-template-columns:1fr}.training-nav{flex-direction:column;gap:12px}.training-nav .btn{width:100%;text-align:center}.process-flow{flex-direction:column;align-items:stretch}.process-arrow{text-align:center;transform:rotate(90deg)}}
-@media(max-width:480px){.info-cards{grid-template-columns:1fr}.question-card{padding:24px 20px}.question-text{font-size:16px}}
+@media(max-width:768px){
+nav{display:none}.mobile-menu-btn{display:block}
+.hero-inner{flex-direction:column;text-align:center;padding:40px 20px}.hero-text p{margin:0 auto 30px}.hero-visual{display:none}
+.info-cards{grid-template-columns:1fr 1fr}.info-card{border-right:none!important;border-bottom:1px solid var(--gray);padding:16px 10px}.info-card:last-child{border-bottom:none}
+.about-grid{grid-template-columns:1fr;gap:40px}
+.modules-grid{grid-template-columns:1fr}
+.form-grid{grid-template-columns:1fr}.form-group.full{grid-column:1}
+.footer-grid{grid-template-columns:1fr}
+.training-nav{flex-direction:column;gap:12px}.training-nav .btn{width:100%;text-align:center}
+.process-flow{flex-direction:column;align-items:stretch}.process-arrow{text-align:center;transform:rotate(90deg)}
+.logo-text{display:none}
+.header-inner{padding:0 16px}
+.candidate-section{padding:40px 16px}.form-card{padding:28px 20px}
+.module-display{padding:28px 20px}
+.question-card{padding:28px 20px}
+.results-card{padding:32px 20px}
+.assessment-header h3{font-size:15px}
+    .certificate-container{padding:20px 16px}
+    .cert-name{font-size:24px!important;padding:0 20px 8px!important}
+    #certificate-print{padding:20px 16px;border-width:4px;max-width:100%}
+    #certificate-print .cert-title{font-size:20px;letter-spacing:1px}
+    #certificate-print .cert-subtitle{font-size:12px;letter-spacing:1px}
+    #certificate-print .cert-body{margin:24px 0}
+    #certificate-print .cert-details{grid-template-columns:1fr;gap:12px;font-size:13px}
+    #certificate-print .cert-footer{flex-direction:column;gap:20px;margin-top:30px;padding-top:20px}
+    #certificate-print .cert-signature-line{width:100px}
+    #certificate-print .cert-logo{height:40px}
+}
+@media(max-width:480px){
+.info-cards{grid-template-columns:1fr}
+.question-card{padding:24px 16px}.question-text{font-size:16px}
+.hero-text h1{font-size:26px}
+.section-title{font-size:22px}
+.btn{padding:12px 20px;font-size:13px}
+    .info-card{padding:14px 8px}
+    .about-card{padding:24px 20px}
+    #certificate-print{padding:16px 12px;border-width:3px}
+    #certificate-print .cert-title{font-size:18px}
+    #certificate-print .cert-name{font-size:18px!important;padding:0 12px 8px!important}
+    #certificate-print .cert-details{font-size:12px;gap:10px}
+    #certificate-print .cert-signature-line{width:80px}
+}
+@media(max-width:380px){
+.hero-text h1{font-size:22px}
+.candidate-section .section-title{font-size:24px}
+.question-text{font-size:15px}
+.option-text{font-size:14px}
+.option-card{padding:14px 16px}
+}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.fade-in{animation:fadeIn .4s ease}
 </style>
 <header id="main-header" class="hidden">
@@ -206,7 +259,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.8);padding:60px 20px 30px}
           <div class="circle c1"></div>
           <div class="circle c2"></div>
           <div class="circle c3"></div>
-          <div class="hero-icon">&#128188;</div>
+          <img src="acl.png" alt="ACL Logo" class="hero-logo" onerror="this.style.display='none'">
         </div>
       </div>
     </div>
@@ -252,6 +305,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.8);padding:60px 20px 30px}
         </div>
       </div>
       <div class="about-card">
+        <img src="acl.png" alt="ACL Logo" class="about-logo" onerror="this.style.display='none'">
         <h3>YOU WILL LEARN ABOUT:</h3>
         <ul>
           <li>Understanding your role as an ACL candidate</li>
@@ -268,7 +322,10 @@ footer{background:var(--navy);color:rgba(255,255,255,.8);padding:60px 20px 30px}
   </section>
 
   <section class="modules-section" id="modules-preview">
-    <h2 class="section-title">TRAINING MODULES</h2>
+    <div class="modules-header">
+      <img src="acl.png" alt="ACL Logo" class="section-logo" onerror="this.style.display='none'">
+      <h2 class="section-title" style="margin-bottom:0">TRAINING MODULES</h2>
+    </div>
     <div class="modules-grid" id="modules-grid"></div>
   </section>
 
@@ -305,6 +362,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.8);padding:60px 20px 30px}
       <div class="footer-grid">
         <div class="footer-col">
           <h4>ADVENWARE CAREER LINK</h4>
+          <img src="acl.png" alt="ACL Logo" style="height:40px;width:auto;margin-bottom:12px;display:block">
           <p style="font-size:14px;line-height:1.7">Preparing candidates for professional success. Building the mindset, skills and habits that organizations value.</p>
         </div>
         <div class="footer-col">
@@ -338,6 +396,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.8);padding:60px 20px 30px}
 <div id="candidate-page" class="page">
   <div class="page-content">
     <div class="candidate-section">
+      <img src="acl.png" alt="ACL Logo" class="candidate-logo" onerror="this.style.display='none'">
       <h2 class="section-title">Candidate Information</h2>
       <p class="subtitle">Please fill in your details to begin the training.</p>
       <div class="form-card">
@@ -423,7 +482,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.8);padding:60px 20px 30px}
 <div id="training-page" class="page">
   <div class="training-header">
     <div class="training-header-inner">
-      <h2 id="training-module-title">Module 1</h2>
+      <h2><img src="acl.png" alt="ACL Logo" class="training-logo" onerror="this.style.display='none'"><span id="training-module-title">Module 1</span></h2>
       <div class="training-meta">
         <span id="training-progress-text">Module 1 of 6</span>
         <div class="progress-mini"><div class="progress-mini-fill" id="training-progress-bar" style="width:0%"></div></div>
