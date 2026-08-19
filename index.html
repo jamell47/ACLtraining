@@ -756,11 +756,15 @@ function downloadCertificate(){
   setTimeout(()=>{
     html2canvas(element,{scale:2,useCORS:true,backgroundColor:'#ffffff'}).then(canvas=>{
       const{jsPDF}=window.jspdf;
-      const pdf=new jsPDF('landscape','mm','a4');
+      const pdf=new jsPDF('portrait','mm','a4');
       const imgData=canvas.toDataURL('image/jpeg',0.95);
       const pdfWidth=pdf.internal.pageSize.getWidth();
       const pdfHeight=pdf.internal.pageSize.getHeight();
-      pdf.addImage(imgData,'JPEG',0,0,pdfWidth,pdfHeight);
+      const imgWidth=pdfWidth-20;
+      const imgHeight=(canvas.height*imgWidth)/canvas.width;
+      const x=10;
+      const y=(pdfHeight-imgHeight)/2;
+      pdf.addImage(imgData,'JPEG',x,y,imgWidth,imgHeight);
       pdf.save('ACL_Certificate_'+((candidate.fullName||'Candidate').replace(/\\s+/g,'_'))+'.pdf');
       btn.textContent='Download Certificate PDF';btn.disabled=false;
       showToast('Certificate downloaded successfully!');
